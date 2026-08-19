@@ -2332,27 +2332,27 @@ body {
     .footer-yellow-shape {
         clip-path: url(#footer-yellow-clip-mobile);
         -webkit-clip-path: url(#footer-yellow-clip-mobile);
-        padding-top: clamp(7.5rem, 20vw, 9.5rem) !important;
-        padding-inline: 1.2rem !important;
+        padding: clamp(5.2rem, 13vw, 6.5rem) 1.2rem 1.5rem !important;
     }
 
     .footer-logo-badge {
         top: 0;
         left: 0;
-        padding: 0.5rem 0.75rem;
+        padding: 0.4rem 0.6rem;
         z-index: 30;
     }
 
     .footer-brand-logo {
-        max-height: clamp(75px, 16vw, 95px) !important;
+        max-height: clamp(75px, 15vw, 90px) !important;
     }
 
     .footer-grid {
-        margin-top: 0.5rem !important;
+        margin-top: 0.2rem !important;
+        margin-bottom: 1.5rem !important;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        gap: 1.8rem;
+        gap: 1.5rem;
     }
 
 
