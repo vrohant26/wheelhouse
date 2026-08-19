@@ -85,11 +85,11 @@
 								<div class="footer-nav-col">
 									<h4 class="footer-nav-header">CONNECT</h4>
 									<ul class="footer-nav-list">
-										<li><a href="https://instagram.com" target="_blank" rel="noopener">INSTAGRAM</a></li>
-										<li><a href="https://facebook.com" target="_blank" rel="noopener">FACEBOOK</a></li>
-										<li><a href="https://youtube.com" target="_blank" rel="noopener">YOUTUBE</a></li>
+										<li><a href="https://www.instagram.com/thewheelhouse.official?utm_source=qr" target="_blank" rel="noopener">INSTAGRAM</a></li>
+										<li><a href="https://youtube.com/@thewheelhouseofficial?si=2m-YyjSzIULCpF2L" target="_blank" rel="noopener">YOUTUBE</a></li>
 									</ul>
 								</div>
+
 
 							</div>
 
