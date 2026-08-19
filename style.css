@@ -461,7 +461,8 @@ body {
     padding-left: clamp(1.5rem, 4vw, 5rem);
     padding-bottom: clamp(1.5rem, 3.5vw, 4.5rem);
     padding-top: clamp(2rem, 4vw, 5rem);
-    max-width: clamp(400px, 62vw, 1050px);
+    /* Cap at 56vw so the right-side card always has its 34vw+ of room */
+    max-width: clamp(300px, 56vw, 900px);
 }
 
 .hero-title {
@@ -478,8 +479,10 @@ body {
     bottom: 0;
     right: 0;
     z-index: 15;
-    padding: clamp(1.5rem, 2.6vw, 3.2rem) clamp(1.5rem, 2.8vw, 3.5rem);
-    max-width: clamp(320px, 32vw, 540px);
+    padding: clamp(1rem, 2.2vw, 3rem) clamp(1rem, 2.5vw, 3.2rem);
+    /* Keep right card to ~33vw so it doesn't eat into left headline */
+    max-width: clamp(280px, 33vw, 520px);
+    width: clamp(280px, 33vw, 520px);
 }
 
 
@@ -1963,13 +1966,43 @@ body {
 /* ==========================================================================
    Responsive Breakpoints (Unified & DRY)
    ========================================================================== */
+
+/* Very large displays / 4K — give title more room, keep card proportional */
+@media (min-width: 1600px) {
+    .hero-content {
+        max-width: clamp(700px, 52vw, 1000px);
+    }
+    .hero-bottom-card {
+        max-width: clamp(380px, 30vw, 560px);
+        width: clamp(380px, 30vw, 560px);
+    }
+}
+
+/* 1280–1600px: common laptop range (incl. 1536px = 1920×1080 @ 125%) */
+@media (max-width: 1600px) and (min-width: 1025px) {
+    .hero-content {
+        max-width: clamp(340px, 52vw, 820px);
+        padding-left: clamp(1.2rem, 3vw, 3.5rem);
+        padding-bottom: clamp(1.2rem, 2.8vw, 3.5rem);
+    }
+    .hero-bottom-card {
+        max-width: clamp(280px, 34vw, 480px);
+        width: clamp(280px, 34vw, 480px);
+        padding: clamp(1rem, 2vw, 2.5rem) clamp(1rem, 2vw, 2.8rem);
+    }
+    .hero-description {
+        font-size: clamp(0.85rem, 1.1vw, 1.05rem);
+    }
+}
+
 @media (max-width: 1024px) {
     .hero-content {
-        max-width: 100%;
+        max-width: 58%;
     }
 
     .hero-bottom-card {
-        max-width: 440px;
+        max-width: 40%;
+        width: 40%;
     }
 
     .float-img-left {
