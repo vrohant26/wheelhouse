@@ -343,7 +343,12 @@ get_header();
 			<div class="testimonial-right">
 				<div class="testimonial-card-wrapper">
 					
-					<!-- Green Main Card Block -->
+					<!-- 1. Top Person Avatar Image -->
+					<div class="testimonial-person-img-wrapper">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/testimonials images/AIMA.jpg' ); ?>" alt="AIMA" class="testimonial-person-img" id="testimonial-img">
+					</div>
+
+					<!-- 2. Green Main Card Block (Clipped to SVG Path) -->
 					<div class="testimonial-green-card">
 						
 						<!-- Top Quote Area -->
@@ -353,31 +358,40 @@ get_header();
 							</p>
 						</div>
 
-						<!-- Author Meta -->
-						<div class="testimonial-author-meta">
-							<h4 class="author-name" id="testimonial-name">MR. LALIT BOOB</h4>
-							<span class="author-title" id="testimonial-title">PRESIDENT - AIMA</span>
+						<!-- Large Slide Counter inside bottom-left block -->
+						<div class="testimonial-counter" id="testimonial-counter">01/21</div>
+
+
+					</div>
+
+					<!-- 3. Author Meta (Positioned in bottom cutout notch) -->
+					<div class="testimonial-author-meta">
+						<h4 class="author-name" id="testimonial-name">MR. LALIT BOOB</h4>
+						<span class="author-title" id="testimonial-title">PRESIDENT - AIMA</span>
+					</div>
+
+					<!-- 4. Cutout Pocket holding NEXT & PREV Buttons & Dots -->
+					<div class="testimonial-next-pocket">
+						<div class="testimonial-nav-btns">
+							<button type="button" class="testimonial-nav-btn testimonial-next-btn" id="testimonial-next-btn">
+								<span>NEXT</span>
+							</button>
+							<button type="button" class="testimonial-nav-btn testimonial-prev-btn" id="testimonial-prev-btn">
+								<span>PREV</span>
+							</button>
 						</div>
-
-						<!-- Bottom Row: Counter & Nav Buttons -->
-						<div class="testimonial-card-bottom">
-							<div class="testimonial-counter" id="testimonial-counter">01/21</div>
-
-							<div class="testimonial-nav-btns">
-								<button type="button" class="testimonial-nav-btn testimonial-prev-btn" id="testimonial-prev-btn">
-									<span>PREV</span>
-								</button>
-								<button type="button" class="testimonial-nav-btn testimonial-next-btn" id="testimonial-next-btn">
-									<span>NEXT</span>
-								</button>
-							</div>
+						
+						<!-- Indicator Dots -->
+						<div class="testimonial-dots-nav">
+							<span class="dot-item active" data-index="0"></span>
+							<span class="dot-item" data-index="1"></span>
+							<span class="dot-item" data-index="2"></span>
+							<span class="dot-item" data-index="3"></span>
 						</div>
-
 					</div>
 
 				</div>
 			</div>
-
 
 		</div>
 	</section>

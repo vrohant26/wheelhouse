@@ -1561,51 +1561,74 @@ body {
 }
 
 
-/* Green Main Card Block */
+/* Green Main Card Block with Dual-Stepped SVG ClipPath */
 .testimonial-green-card {
     background-color: var(--color-primary-green);
-    border-radius: clamp(24px, 3.5vw, 44px);
-    clip-path: none !important;
-    -webkit-clip-path: none !important;
-    padding: clamp(2rem, 3.5vw, 3.8rem);
+    clip-path: url(#testimonial-green-clip);
+    -webkit-clip-path: url(#testimonial-green-clip);
+    padding: clamp(2rem, 3vw, 4rem);
     color: var(--color-white);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: clamp(380px, 36vw, 480px);
+    height: clamp(420px, 40vw, 520px);
+    min-height: clamp(420px, 40vw, 520px);
     box-sizing: border-box;
     position: relative;
-    box-shadow: 0 25px 50px rgba(0, 168, 89, 0.25);
+    filter: drop-shadow(0 25px 50px rgba(0, 168, 89, 0.3));
 }
 
 /* Quote Text Box */
 .testimonial-quote-box {
-    margin-left: 0;
-    width: 100%;
-    min-height: 160px;
+
+    margin-left: clamp(150px, 27%, 210px);
+    height: clamp(180px, 20vw, 240px);
+    min-height: clamp(180px, 20vw, 240px);
     display: flex;
     align-items: flex-start;
     padding-top: 0.5rem;
 }
 
+
 .testimonial-quote {
     font-family: 'Fifties Med', var(--font-heading);
     font-size: var(--fs-lg);
     font-weight: 500;
-    line-height: 1.35;
+    line-height: 1.3;
     text-transform: uppercase;
     color: var(--color-white);
     margin: 0;
 }
 
-/* Author Meta inside Green Card */
+
+/* Bottom Card Row */
+.testimonial-card-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+.testimonial-counter {
+    font-family: 'Fifties Med', var(--font-heading);
+    font-size: clamp(2.3rem, 4.4vw, 5rem);
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.35);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    padding-bottom: 0.5rem;
+    margin-top: auto;
+    white-space: nowrap;
+}
+
+/* Author Meta (Positioned in bottom cutout notch) */
 .testimonial-author-meta {
-    position: relative;
-    bottom: auto;
-    left: auto;
-    max-width: 100%;
-    margin-top: 1.5rem;
-    z-index: 5;
+    position: absolute;
+    bottom: clamp(2.2rem, 3.8vw, 4.2rem);
+    left: clamp(230px, 39%, 300px);
+    max-width: clamp(220px, 20vw, 380px);
+    padding-right: 1rem;
+    z-index: 15;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1617,30 +1640,20 @@ body {
     font-weight: 800;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: var(--color-white);
+    color: var(--color-dark);
     margin-bottom: 0.25rem;
     line-height: 1.2;
 }
 
 .author-title {
     font-family: 'Google Sans', var(--font-body);
-    font-size: clamp(0.85rem, 0.95vw, 1rem);
+    font-size: clamp(0.75rem, 0.9vw, 0.95rem);
     font-weight: 600;
     text-transform: uppercase;
-    color: var(--color-primary-yellow);
+    color: rgba(26, 32, 44, 0.65);
     letter-spacing: 0.03em;
     line-height: 1.35;
 }
-
-/* Bottom Card Row */
-.testimonial-card-bottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: clamp(1.8rem, 3vw, 3rem);
-    gap: 1.5rem;
-}
-
 
 
 /* NEXT over PREV Button Controls (Positioned in bottom-right corner) */
@@ -2273,16 +2286,15 @@ body {
     }
 
     .testimonial-author-meta .author-name {
-        color: var(--color-white) !important;
+        color: var(--color-dark) !important;
         font-size: 1.1rem;
         margin-bottom: 0.15rem;
     }
 
     .testimonial-author-meta .author-title {
-        color: var(--color-primary-yellow) !important;
+        color: rgba(26, 32, 44, 0.7) !important;
         font-size: 0.85rem;
     }
-
 
     .testimonial-next-pocket {
         position: relative;
