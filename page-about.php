@@ -359,7 +359,8 @@ get_header();
 						</div>
 
 						<!-- Large Slide Counter inside bottom-left block -->
-						<div class="testimonial-counter" id="testimonial-counter">01/04</div>
+						<div class="testimonial-counter" id="testimonial-counter">01/21</div>
+
 
 					</div>
 
