@@ -677,10 +677,18 @@ function wheelhouse_save_featured_project_meta( $post_id ) {
 		return;
 	}
 
+	if ( isset( $_POST['wheelhouse_featured_on_home'] ) && '1' === $_POST['wheelhouse_featured_on_home'] ) {
+		update_post_meta( $post_id, '_featured_on_home', '1' );
+	} else {
+		delete_post_meta( $post_id, '_featured_on_home' );
+	}
+}
+add_action( 'save_post_projects', 'wheelhouse_save_featured_project_meta' );
 
 /* --------------------------------------------------
    Handle Contact Form Submission via AJAX / POST
 -------------------------------------------------- */
+
 function wheelhouse_handle_contact_form() {
 	if ( isset( $_POST['action'] ) && 'wheelhouse_submit_contact' === $_POST['action'] ) {
 		// Nonce check
