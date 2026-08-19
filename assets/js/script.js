@@ -941,4 +941,63 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 500);
     }
   }
+
+  // Contact Form AJAX Submission Handler
+  const contactForm = document.getElementById("contact-form");
+  const responseBox = document.getElementById("contact-form-response");
+
+  if (contactForm && responseBox) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const submitBtn = contactForm.querySelector("button[type='submit']");
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : "";
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.7";
+        submitBtn.innerHTML = "<span>SENDING...</span>";
+      }
+
+      const formData = new FormData(contactForm);
+      const ajaxUrl = (typeof wheelhouseData !== "undefined" && wheelhouseData.ajaxUrl) ? wheelhouseData.ajaxUrl : "/wp-admin/admin-ajax.php";
+
+      fetch(ajaxUrl, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          responseBox.style.display = "block";
+          if (data && data.success) {
+            responseBox.style.backgroundColor = "#e6fffa";
+            responseBox.style.color = "#234e52";
+            responseBox.style.border = "1px solid #b2f5ea";
+            responseBox.textContent = data.data.message || "Thank you! Your message has been sent.";
+            contactForm.reset();
+          } else {
+            responseBox.style.backgroundColor = "#fff5f5";
+            responseBox.style.color = "#9b2c2c";
+            responseBox.style.border = "1px solid #feb2b2";
+            responseBox.textContent = (data && data.data && data.data.message) ? data.data.message : "An error occurred. Please try again.";
+          }
+        })
+        .catch(() => {
+          responseBox.style.display = "block";
+          responseBox.style.backgroundColor = "#fff5f5";
+          responseBox.style.color = "#9b2c2c";
+          responseBox.style.border = "1px solid #feb2b2";
+          responseBox.textContent = "An error occurred while sending your message. Please try again.";
+        })
+        .finally(() => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = "1";
+            submitBtn.innerHTML = originalBtnText;
+          }
+          responseBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        });
+    });
+  }
 });
+

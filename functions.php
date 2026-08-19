@@ -26,9 +26,11 @@ function wheelhouse_scripts() {
 	wp_enqueue_script( 'wheelhouse-script', get_template_directory_uri() . '/assets/js/script.js', array( 'gsap', 'gsap-scrolltrigger', 'lenis' ), '1.0.0', true );
 	wp_localize_script( 'wheelhouse-script', 'wheelhouseData', array(
 		'themeUri' => get_template_directory_uri(),
+		'ajaxUrl'  => admin_url( 'admin-ajax.php' ),
 	) );
 }
 add_action( 'wp_enqueue_scripts', 'wheelhouse_scripts' );
+
 
 
 // Register Custom Post Type: Projects & Taxonomy: Service Categories
@@ -675,13 +677,53 @@ function wheelhouse_save_featured_project_meta( $post_id ) {
 		return;
 	}
 
-	if ( isset( $_POST['wheelhouse_featured_on_home'] ) && '1' === $_POST['wheelhouse_featured_on_home'] ) {
-		update_post_meta( $post_id, '_featured_on_home', '1' );
-	} else {
-		delete_post_meta( $post_id, '_featured_on_home' );
+
+/* --------------------------------------------------
+   Handle Contact Form Submission via AJAX / POST
+-------------------------------------------------- */
+function wheelhouse_handle_contact_form() {
+	if ( isset( $_POST['action'] ) && 'wheelhouse_submit_contact' === $_POST['action'] ) {
+		// Nonce check
+		if ( ! isset( $_POST['contact_nonce'] ) || ! wp_verify_nonce( $_POST['contact_nonce'], 'wheelhouse_contact_nonce' ) ) {
+			wp_send_json_error( array( 'message' => 'Security check failed. Please refresh the page and try again.' ) );
+		}
+
+		$name     = isset( $_POST['name'] ) ? sanitize_text_field( $_POST['name'] ) : '';
+		$email    = isset( $_POST['email'] ) ? sanitize_email( $_POST['email'] ) : '';
+		$phone    = isset( $_POST['phone'] ) ? sanitize_text_field( $_POST['phone'] ) : '';
+		$services = isset( $_POST['services'] ) && is_array( $_POST['services'] ) ? array_map( 'sanitize_text_field', $_POST['services'] ) : array();
+		$message  = isset( $_POST['message'] ) ? sanitize_textarea_field( $_POST['message'] ) : '';
+
+		if ( empty( $name ) || empty( $email ) || empty( $message ) ) {
+			wp_send_json_error( array( 'message' => 'Please fill in all required fields (Name, Email, Message).' ) );
+		}
+
+		$admin_email = get_option( 'admin_email' );
+		$to          = ! empty( $admin_email ) ? $admin_email : 'info@thewheelhouse.in';
+		$subject     = 'New Contact Inquiry from ' . $name . ' - The Wheelhouse Website';
+
+		$body  = "You have received a new contact form message from The Wheelhouse website:\n\n";
+		$body .= "Full Name: " . $name . "\n";
+		$body .= "Email Address: " . $email . "\n";
+		$body .= "Phone Number: " . ( ! empty( $phone ) ? $phone : 'N/A' ) . "\n";
+		$body .= "Services Needed: " . ( ! empty( $services ) ? implode( ', ', $services ) : 'None selected' ) . "\n\n";
+		$body .= "Message:\n" . $message . "\n\n";
+		$body .= "---\nSent from: " . home_url();
+
+		$headers = array(
+			'Content-Type: text/plain; charset=UTF-8',
+			'From: ' . get_bloginfo( 'name' ) . ' <' . $to . '>',
+			'Reply-To: ' . $name . ' <' . $email . '>',
+		);
+
+		@wp_mail( $to, $subject, $body, $headers );
+
+		wp_send_json_success( array( 'message' => 'Thank you! Your message has been sent successfully. Our team will get in touch with you shortly.' ) );
 	}
 }
-add_action( 'save_post_projects', 'wheelhouse_save_featured_project_meta' );
+add_action( 'wp_ajax_wheelhouse_submit_contact', 'wheelhouse_handle_contact_form' );
+add_action( 'wp_ajax_nopriv_wheelhouse_submit_contact', 'wheelhouse_handle_contact_form' );
+
 
 
 

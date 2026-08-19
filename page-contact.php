@@ -121,7 +121,12 @@ get_header();
 				<div class="contact-form-card">
 					<h3 class="form-title">SEND US A MESSAGE</h3>
 
-					<form action="#" method="post" class="contact-form" id="contact-form">
+					<div id="contact-form-response" class="form-response-msg" style="display:none; margin-bottom: 20px; padding: 14px 18px; border-radius: 12px; font-weight: 600; font-size: 0.95rem; line-height: 1.5;"></div>
+
+					<form action="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>" method="post" class="contact-form" id="contact-form">
+						<input type="hidden" name="action" value="wheelhouse_submit_contact">
+						<?php wp_nonce_field( 'wheelhouse_contact_nonce', 'contact_nonce' ); ?>
+
 						
 						<!-- Full Name -->
 						<div class="form-group">
