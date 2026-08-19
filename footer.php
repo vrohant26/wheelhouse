@@ -30,7 +30,7 @@
 							<!-- Left Column: Address & Contact Us Button -->
 							<div class="footer-col-left">
 								<address class="footer-address">
-									THE WHEEL HOUSE,<br>
+									THE WHEELHOUSE,<br>
 									JYOTI KALASH APARTMENT, JAIBHAVANI ROAD,<br>
 									OPP SUMAN HOSPITAL, NASHIK, MAHARASHTRA 422101
 								</address>
