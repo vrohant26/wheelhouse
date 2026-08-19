@@ -229,6 +229,7 @@ body {
     width: 100%;
     max-width: var(--container-max-width);
     height: 100svh;
+    min-height: 800px;
     margin: 0 auto;
     padding: clamp(0.75rem, 1.5vw, 1.5rem);
     display: flex;
@@ -1972,6 +1973,7 @@ body {
     .hero-content {
         max-width: clamp(700px, 52vw, 1000px);
     }
+
     .hero-bottom-card {
         max-width: clamp(380px, 30vw, 560px);
         width: clamp(380px, 30vw, 560px);
@@ -1985,11 +1987,13 @@ body {
         padding-left: clamp(1.2rem, 3vw, 3.5rem);
         padding-bottom: clamp(1.2rem, 2.8vw, 3.5rem);
     }
+
     .hero-bottom-card {
         max-width: clamp(280px, 34vw, 480px);
         width: clamp(280px, 34vw, 480px);
         padding: clamp(1rem, 2vw, 2.5rem) clamp(1rem, 2vw, 2.8rem);
     }
+
     .hero-description {
         font-size: clamp(0.85rem, 1.1vw, 1.05rem);
     }
