@@ -555,24 +555,30 @@ function wheelhouse_clients_admin_footer_js() {
 			}
 			clientFrame = wp.media({
 				title: 'Select or Upload Client Logos',
-				button: { text: 'Use Selected Logos' },
+				button: { text: 'Add Selected Logos' },
 				multiple: true
 			});
 			clientFrame.on('select', function() {
 				var selection = clientFrame.state().get('selection');
-				var ids = [];
-				var thumbsHtml = '';
+				// Read existing IDs already saved
+				var existingIds = $('#wheelhouse_client_logo_ids').val().split(',').filter(Boolean).map(Number);
+				var newThumbsHtml = '';
 				selection.each(function(attachment) {
 					var att = attachment.toJSON();
-					ids.push(att.id);
-					var url = att.sizes && att.sizes.medium ? att.sizes.medium.url : att.url;
-					thumbsHtml += '<div class="wh-thumb-item" data-id="' + att.id + '" style="position: relative; width: 110px; height: 80px; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e0; background: #fff; display: flex; align-items: center; justify-content: center; padding: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">';
-					thumbsHtml += '<img src="' + url + '" style="max-width: 100%; max-height: 100%; object-fit: contain;">';
-					thumbsHtml += '<button type="button" class="wh-remove-thumb" style="position: absolute; top: 4px; right: 4px; background: #e74c3c; color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 13px; font-weight: 700; line-height: 1; text-align: center;">&times;</button>';
-					thumbsHtml += '</div>';
+					// Only add if not already present
+					if (existingIds.indexOf(att.id) === -1) {
+						existingIds.push(att.id);
+						var url = att.sizes && att.sizes.medium ? att.sizes.medium.url : att.url;
+						newThumbsHtml += '<div class="wh-thumb-item" data-id="' + att.id + '" style="position: relative; width: 110px; height: 80px; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e0; background: #fff; display: flex; align-items: center; justify-content: center; padding: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">';
+						newThumbsHtml += '<img src="' + url + '" style="max-width: 100%; max-height: 100%; object-fit: contain;">';
+						newThumbsHtml += '<button type="button" class="wh-remove-thumb" style="position: absolute; top: 4px; right: 4px; background: #e74c3c; color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 13px; font-weight: 700; line-height: 1; text-align: center;">&times;</button>';
+						newThumbsHtml += '</div>';
+					}
 				});
-				$('#wheelhouse_client_logo_ids').val(ids.join(','));
-				$('#wheelhouse-thumbs-container').html(thumbsHtml);
+				// Update hidden field with merged IDs
+				$('#wheelhouse_client_logo_ids').val(existingIds.join(','));
+				// Append new thumbnails (don't replace existing ones)
+				$('#wheelhouse-thumbs-container').append(newThumbsHtml);
 			});
 			clientFrame.open();
 		});
@@ -588,24 +594,30 @@ function wheelhouse_clients_admin_footer_js() {
 			}
 			projectFrame = wp.media({
 				title: 'Select or Upload Project Execution Photos',
-				button: { text: 'Use Selected Photos' },
+				button: { text: 'Add Selected Photos' },
 				multiple: true
 			});
 			projectFrame.on('select', function() {
 				var selection = projectFrame.state().get('selection');
-				var ids = [];
-				var thumbsHtml = '';
+				// Read existing IDs already saved
+				var existingIds = $('#wheelhouse_project_gallery_ids').val().split(',').filter(Boolean).map(Number);
+				var newThumbsHtml = '';
 				selection.each(function(attachment) {
 					var att = attachment.toJSON();
-					ids.push(att.id);
-					var url = att.sizes && att.sizes.medium ? att.sizes.medium.url : att.url;
-					thumbsHtml += '<div class="wh-thumb-item" data-id="' + att.id + '" style="position: relative; width: 120px; height: 90px; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e0; background: #f8fafc; display: flex; align-items: center; justify-content: center; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">';
-					thumbsHtml += '<img src="' + url + '" style="max-width: 100%; max-height: 100%; object-fit: cover; border-radius: 4px;">';
-					thumbsHtml += '<button type="button" class="wh-remove-thumb-project" style="position: absolute; top: 4px; right: 4px; background: #e74c3c; color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 13px; font-weight: 700; line-height: 1; text-align: center;">&times;</button>';
-					thumbsHtml += '</div>';
+					// Only add if not already present
+					if (existingIds.indexOf(att.id) === -1) {
+						existingIds.push(att.id);
+						var url = att.sizes && att.sizes.medium ? att.sizes.medium.url : att.url;
+						newThumbsHtml += '<div class="wh-thumb-item" data-id="' + att.id + '" style="position: relative; width: 120px; height: 90px; border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e0; background: #f8fafc; display: flex; align-items: center; justify-content: center; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">';
+						newThumbsHtml += '<img src="' + url + '" style="max-width: 100%; max-height: 100%; object-fit: cover; border-radius: 4px;">';
+						newThumbsHtml += '<button type="button" class="wh-remove-thumb-project" style="position: absolute; top: 4px; right: 4px; background: #e74c3c; color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 13px; font-weight: 700; line-height: 1; text-align: center;">&times;</button>';
+						newThumbsHtml += '</div>';
+					}
 				});
-				$('#wheelhouse_project_gallery_ids').val(ids.join(','));
-				$('#wheelhouse-project-thumbs-container').html(thumbsHtml);
+				// Update hidden field with merged IDs
+				$('#wheelhouse_project_gallery_ids').val(existingIds.join(','));
+				// Append new thumbnails (don't replace existing ones)
+				$('#wheelhouse-project-thumbs-container').append(newThumbsHtml);
 			});
 			projectFrame.open();
 		});
